@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyhnh411wvhdm"]
+
+[ext_resource type="Script" uid="uid://b2p5yy8xfkfkr" path="res://scripts/ui scripts/swag_text.gd" id="1_v8mnt"]
+
+[node name="swagtext" type="RichTextLabel"]
+offset_right = 1610.0
+offset_bottom = 125.0
+scale = Vector2(0.1, 0.1)
+theme_override_font_sizes/italics_font_size = 91
+bbcode_enabled = true
+text = "[shake rate=20.0 level=50 connected=1][i]im too $w4gg to use the main door![/i][/shake]"
+fit_content = true
+script = ExtResource("1_v8mnt")

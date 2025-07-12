@@ -1,0 +1,150 @@
+[gd_scene load_steps=19 format=3 uid="uid://qod2r5k6g7dv"]
+
+[ext_resource type="PackedScene" uid="uid://cimoiaxbykp3v" path="res://scenes/hud scenes/health_bar.tscn" id="1_1lqtp"]
+[ext_resource type="Script" uid="uid://d0eap6yyqrkcx" path="res://scripts/ui scripts/dev_stuff.gd" id="1_exax2"]
+[ext_resource type="PackedScene" uid="uid://d3c8yaltu7wtw" path="res://scenes/character scenes/pj_pizzamaker.tscn" id="1_xxk0g"]
+[ext_resource type="PackedScene" uid="uid://d3ghe1dskwcyb" path="res://scenes/systems/weapon_system.tscn" id="2_4xnq1"]
+[ext_resource type="PackedScene" uid="uid://bgcur5hq45q0x" path="res://scenes/hud scenes/dev_menu.tscn" id="2_dnim3"]
+[ext_resource type="PackedScene" uid="uid://deprffb68axgx" path="res://scenes/hud scenes/pizza_counter.tscn" id="2_pnewh"]
+[ext_resource type="PackedScene" uid="uid://cakyww4qf65sj" path="res://scenes/weapon scenes/pizza_gun.tscn" id="2_v3foh"]
+[ext_resource type="PackedScene" uid="uid://b7ni1t7lrmtoh" path="res://scenes/systems/weapon_container.tscn" id="2_xd0nd"]
+[ext_resource type="Script" uid="uid://d2duqfvkh8x80" path="res://scripts/spin_to_mouse.gd" id="2_xkety"]
+[ext_resource type="PackedScene" uid="uid://coyg1t1cl41dq" path="res://scenes/weapon scenes/pizzarang.tscn" id="3_nu7rc"]
+[ext_resource type="Script" uid="uid://ceqqeijauw81r" path="res://scripts/character scripts/pj pizzamaker scripts/make_pizza.gd" id="3_oitqc"]
+[ext_resource type="PackedScene" uid="uid://258y2idnlowh" path="res://scenes/hud scenes/ammo_counter.tscn" id="3_uva4o"]
+[ext_resource type="Texture2D" uid="uid://crl1ggm5jiqyr" path="res://sprites/characters/pj pizzamaker/arm.png" id="5_og1g7"]
+[ext_resource type="Texture2D" uid="uid://b2g0ig688b4e4" path="res://sprites/tiles/pizza thrower inc tileset.png" id="14_5gj7m"]
+[ext_resource type="Script" uid="uid://cdsu2ovd6knqd" path="res://scripts/character scripts/pj pizzamaker scripts/unarmed.gd" id="14_b5mf4"]
+[ext_resource type="PackedScene" uid="uid://dujitxbar1dkr" path="res://scenes/character scenes/skater_doge.tscn" id="16_2jd0n"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pdaur"]
+texture = ExtResource("14_5gj7m")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+1:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_8dwwc"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 255
+sources/1 = SubResource("TileSetAtlasSource_pdaur")
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_exax2")
+
+[node name="Weapon System" parent="." instance=ExtResource("2_4xnq1")]
+
+[node name="Weapon Container" parent="." instance=ExtResource("2_xd0nd")]
+position = Vector2(-129, -205)
+
+[node name="Pizzarang" parent="Weapon Container" node_paths=PackedStringArray("ammo_counter", "pizza_maker", "player", "weapon_system") instance=ExtResource("3_nu7rc")]
+ammo_counter = NodePath("../../CanvasLayer/Ammo Counter")
+pizza_maker = NodePath("../../PJ Pizzamaker/spin spin/make pizza")
+player = NodePath("../../PJ Pizzamaker")
+weapon_system = NodePath("../../Weapon System")
+
+[node name="dev menu" parent="." instance=ExtResource("2_dnim3")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="health bar" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("1_1lqtp")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+offset_bottom = 0.0
+grow_vertical = 0
+player = NodePath("../../PJ Pizzamaker")
+
+[node name="pizza counter" parent="CanvasLayer" node_paths=PackedStringArray("pizza_maker") instance=ExtResource("2_pnewh")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 207.0
+offset_top = -135.0
+offset_right = 247.0
+offset_bottom = -95.0
+grow_vertical = 0
+pizza_maker = NodePath("../../PJ Pizzamaker/spin spin/make pizza")
+
+[node name="Ammo Counter" parent="CanvasLayer" instance=ExtResource("3_uva4o")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 85.0
+offset_top = -134.0
+offset_right = 125.0
+offset_bottom = -94.0
+grow_vertical = 0
+
+[node name="PJ Pizzamaker" parent="." instance=ExtResource("1_xxk0g")]
+position = Vector2(-161, -226)
+collision_mask = 5
+
+[node name="second weapon" type="Node2D" parent="PJ Pizzamaker"]
+z_index = -3
+position = Vector2(-3, -18)
+rotation = 1.5708
+scale = Vector2(1, -1)
+
+[node name="spin spin" type="Node2D" parent="PJ Pizzamaker"]
+position = Vector2(0, -4)
+script = ExtResource("2_xkety")
+
+[node name="make pizza" type="Node2D" parent="PJ Pizzamaker/spin spin" node_paths=PackedStringArray("player")]
+position = Vector2(32.7972, 0.185135)
+skew = -0.305433
+script = ExtResource("3_oitqc")
+player = NodePath("../..")
+
+[node name="pizza gun" parent="PJ Pizzamaker/spin spin" node_paths=PackedStringArray("ammo_counter", "pizza_maker", "player") instance=ExtResource("2_v3foh")]
+position = Vector2(16, -2)
+ammo_counter = NodePath("../../../CanvasLayer/Ammo Counter")
+pizza_maker = NodePath("../make pizza")
+player = NodePath("../..")
+
+[node name="arm" type="Sprite2D" parent="PJ Pizzamaker/spin spin" node_paths=PackedStringArray("ammo_counter")]
+z_index = 1
+texture = ExtResource("5_og1g7")
+hframes = 2
+vframes = 2
+script = ExtResource("14_b5mf4")
+ammo_counter = NodePath("../../../CanvasLayer/Ammo Counter")
+
+[node name="hitbox" type="RayCast2D" parent="PJ Pizzamaker/spin spin/arm"]
+rotation = -1.5708
+enabled = false
+target_position = Vector2(0, 17)
+collision_mask = 10
+hit_from_inside = true
+
+[node name="Camera2D" type="Camera2D" parent="PJ Pizzamaker"]
+zoom = Vector2(2.5, 2.5)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -138.0
+offset_top = -252.0
+offset_right = 349.0
+offset_bottom = -99.0
+text = "directional input + s to slide
+r to reload
+~ to open dev console (i finally figured out how to make one :D)
+e to pick up
+x to drop
+q to cycle"
+
+[node name="TileMap" type="TileMap" parent="." groups=["ground"]]
+z_index = -5
+scale = Vector2(0.5, 0.5)
+tile_set = SubResource("TileSet_8dwwc")
+format = 2
+layer_0/tile_data = PackedInt32Array(-327686, 1, 0, -327685, 1, 0, -786443, 1, 0, -589833, 1, 0, -589832, 1, 0, -589831, 1, 0, -589830, 1, 0, -589829, 1, 0, -589828, 1, 0, -589827, 1, 0, -589826, 1, 0, -589825, 1, 0, -655360, 1, 0, -655359, 1, 0, -655369, 65537, 0, -720905, 65537, 0, -720904, 65537, 0, -720903, 65537, 0, -655367, 65537, 0, -655366, 65537, 0, -655365, 65537, 0, -655368, 65537, 0, -720901, 65537, 0, -720902, 65537, 0, -655364, 65537, 0, -720900, 65537, 0, -786436, 65537, 0, -786435, 65537, 0, -786434, 65537, 0, -786433, 65537, 0, -851968, 65537, 0, -786430, 65537, 0, -786431, 65537, 0, -786432, 65537, 0, -720897, 65537, 0, -720898, 65537, 0, -720899, 65537, 0, -655363, 65537, 0, -655362, 65537, 0, -655361, 65537, 0, -720896, 65537, 0, -720895, 65537, 0, -720894, 65537, 0, -851973, 65537, 0, -851974, 65537, 0, -851975, 65537, 0, -851976, 65537, 0, -917513, 65537, 0, -917514, 65537, 0, -983050, 65537, 0, -983049, 65537, 0, -983048, 65537, 0, -983047, 65537, 0, -983046, 65537, 0, -917509, 65537, 0, -917508, 65537, 0, -917507, 65537, 0, -917506, 65537, 0, -917505, 65537, 0, -983040, 65537, 0, -917510, 65537, 0, -917511, 65537, 0, -917512, 65537, 0, -851977, 65537, 0, -851978, 65537, 0, -851979, 65537, 0, -851980, 65537, 0, -1114111, 1, 0, -1114112, 1, 0, -1048577, 1, 0, -1048578, 1, 0, -1048579, 1, 0, -1048580, 1, 0, -1048581, 1, 0, -1048582, 1, 0, -1048583, 1, 0, -1048584, 1, 0, -1048585, 1, 0, -1048586, 1, 0, -1048587, 1, 0, -983042, 1, 0, -983041, 1, 0, -655351, 1, 0, -655352, 1, 0, -655353, 1, 0, -851952, 1, 0, -851953, 1, 0, -851954, 1, 0, -458749, 1, 0, -458748, 1, 0, -458747, 1, 0, -458746, 1, 0, -458745, 1, 0, -458739, 1, 0, -458738, 1, 0, -458737, 1, 0, -524273, 1, 0, -524272, 1, 0, -524271, 1, 0, -524270, 1, 0, -524269, 1, 0, -524268, 1, 0, -524267, 1, 0, -458740, 1, 0, -458741, 1, 0, -458742, 1, 0, -458743, 1, 0, -458744, 1, 0, -655358, 1, 0, -655357, 1, 0, -655356, 1, 0, -655355, 1, 0, -655354, 1, 0, -655350, 1, 0, -655349, 1, 0, -655348, 1, 0)
+
+[node name="Skater Doge" parent="." instance=ExtResource("16_2jd0n")]
+position = Vector2(-34, -367)
+
+[connection signal="console_closed" from="." to="PJ Pizzamaker" method="_on_game_console_closed"]
+[connection signal="console_closed" from="." to="PJ Pizzamaker/spin spin/pizza gun" method="_on_game_console_closed"]
+[connection signal="console_opened" from="." to="PJ Pizzamaker" method="_on_game_console_opened"]
+[connection signal="console_opened" from="." to="PJ Pizzamaker/spin spin/pizza gun" method="_on_game_console_opened"]

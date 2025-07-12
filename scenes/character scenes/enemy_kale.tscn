@@ -1,0 +1,204 @@
+[gd_scene load_steps=27 format=3 uid="uid://cqyw8apr2iba5"]
+
+[ext_resource type="Script" uid="uid://bsrnhshiiuaov" path="res://scripts/character scripts/enemy kale scripts/enemy_kale.gd" id="1_v02fm"]
+[ext_resource type="Texture2D" uid="uid://dbucvnvw377x4" path="res://sprites/characters/enemy kale/enemy kale.png" id="2_tidyk"]
+[ext_resource type="Texture2D" uid="uid://ddy8lfc4u4mff" path="res://sprites/characters/enemy kale/enemy kale punch-Sheet.png" id="3_ofj6u"]
+[ext_resource type="Texture2D" uid="uid://5h1c75rinlrw" path="res://sprites/characters/enemy kale/enemy kale run-Sheet.png" id="4_1x2p1"]
+[ext_resource type="Texture2D" uid="uid://dy27n8f4cw3bh" path="res://sprites/characters/enemy kale/worm.png" id="5_bf0ck"]
+[ext_resource type="Script" uid="uid://d14v0egeeako4" path="res://scripts/character scripts/enemy_sight.gd" id="5_ysxg0"]
+[ext_resource type="Script" uid="uid://byf628a4yckjw" path="res://scripts/character scripts/enemy kale scripts/worm_punch.gd" id="6_ogykp"]
+[ext_resource type="Script" uid="uid://die4hfna573er" path="res://scripts/character scripts/health.gd" id="7_2xwa4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34msy"]
+atlas = ExtResource("3_ofj6u")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qskm"]
+atlas = ExtResource("3_ofj6u")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fv0b"]
+atlas = ExtResource("4_1x2p1")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eer6y"]
+atlas = ExtResource("4_1x2p1")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vd107"]
+atlas = ExtResource("4_1x2p1")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yoa6c"]
+atlas = ExtResource("4_1x2p1")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ns76m"]
+atlas = ExtResource("4_1x2p1")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1uya"]
+atlas = ExtResource("4_1x2p1")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmgj2"]
+atlas = ExtResource("4_1x2p1")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pq2m7"]
+atlas = ExtResource("4_1x2p1")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tm7uo"]
+atlas = ExtResource("3_ofj6u")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whiyy"]
+atlas = ExtResource("3_ofj6u")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hy5fi"]
+atlas = ExtResource("3_ofj6u")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i23uq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tidyk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34msy")
+}],
+"loop": true,
+"name": &"punch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qskm")
+}],
+"loop": true,
+"name": &"reset",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fv0b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eer6y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vd107")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yoa6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ns76m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1uya")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmgj2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pq2m7")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tm7uo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whiyy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hy5fi")
+}],
+"loop": false,
+"name": &"winding",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dilxo"]
+radius = 14.0
+height = 54.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v08cp"]
+size = Vector2(150, 4)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nc02x"]
+radius = 0.1
+height = 28.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tm7sf"]
+height = 50.28
+
+[node name="enemy kale" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_v02fm")
+
+[node name="animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_i23uq")
+animation = &"punch"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_dilxo")
+
+[node name="Sight" type="Area2D" parent="."]
+script = ExtResource("5_ysxg0")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sight"]
+polygon = PackedVector2Array(14, -11, 30, -54, 137, -55, 137, 28, 26, 28, 14, 8)
+
+[node name="worm punch" type="Area2D" parent="."]
+position = Vector2(-12, -5)
+monitoring = false
+script = ExtResource("6_ogykp")
+
+[node name="Worm" type="Sprite2D" parent="worm punch"]
+visible = false
+position = Vector2(-1, 0)
+texture = ExtResource("5_bf0ck")
+offset = Vector2(75, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="worm punch"]
+position = Vector2(74, 1)
+shape = SubResource("RectangleShape2D_v08cp")
+
+[node name="health" type="Node2D" parent="."]
+script = ExtResource("7_2xwa4")
+health = 40
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(15, 0)
+target_position = Vector2(0, 32)
+collision_mask = 4
+
+[node name="wall_check" type="ShapeCast2D" parent="."]
+position = Vector2(15, -1)
+shape = SubResource("CapsuleShape2D_nc02x")
+target_position = Vector2(0, 11)
+collision_mask = 4
+
+[node name="pizza check" type="ShapeCast2D" parent="."]
+shape = SubResource("CapsuleShape2D_tm7sf")
+target_position = Vector2(128, -1)
+collision_mask = 8
+
+[connection signal="body_entered" from="Sight" to="Sight" method="_on_body_entered"]
+[connection signal="body_exited" from="Sight" to="Sight" method="_on_body_exited"]
+[connection signal="body_entered" from="worm punch" to="worm punch" method="_on_body_entered"]

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh3piibppyg8k"]
+
+[ext_resource type="Texture2D" uid="uid://wm4f1gr7rw11" path="res://sprites/weapons/ammo/pizza platform.png" id="1_6gu2j"]
+[ext_resource type="Script" uid="uid://chpisd5u8lngy" path="res://scripts/weapon scripts/pizza_platform.gd" id="1_vwn0d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1lbuj"]
+size = Vector2(30.8696, 3.51724)
+
+[node name="Pizza Platform" type="RigidBody2D" groups=["pizza_platform"]]
+collision_layer = 11
+collision_mask = 15
+mass = 3.0
+gravity_scale = 0.0
+script = ExtResource("1_vwn0d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("1_6gu2j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.00268459, -1.45034)
+shape = SubResource("RectangleShape2D_1lbuj")

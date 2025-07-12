@@ -1,0 +1,101 @@
+[gd_scene load_steps=11 format=3 uid="uid://dujitxbar1dkr"]
+
+[ext_resource type="Script" uid="uid://p2b2x3utbys7" path="res://scripts/character scripts/enemy doge scripts/skater_doge.gd" id="1_q5vja"]
+[ext_resource type="Texture2D" uid="uid://dr37363cojvto" path="res://sprites/characters/enemy doge/skater doge.png" id="2_wqfbe"]
+[ext_resource type="Script" uid="uid://die4hfna573er" path="res://scripts/character scripts/health.gd" id="3_mwn1m"]
+[ext_resource type="Script" uid="uid://d14v0egeeako4" path="res://scripts/character scripts/enemy_sight.gd" id="4_xn6er"]
+[ext_resource type="Texture2D" uid="uid://bnujs5bvo5bs3" path="res://sprites/effects/skateboard edge effect.png" id="5_2y3d0"]
+[ext_resource type="Script" uid="uid://cl7scrfp3v0r3" path="res://scripts/character scripts/enemy doge scripts/skateboard_hit.gd" id="6_e8l2r"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qo0e8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wqfbe")
+}],
+"loop": true,
+"name": &"neutral",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xkrsv"]
+radius = 23.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2aisu"]
+radius = 4.0
+height = 45.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_66tdl"]
+radius = 0.1
+height = 28.0
+
+[node name="Skater Doge" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_q5vja")
+
+[node name="animation" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 3)
+sprite_frames = SubResource("SpriteFrames_qo0e8")
+animation = &"neutral"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 4)
+shape = SubResource("CircleShape2D_xkrsv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 30)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_2aisu")
+
+[node name="health" type="Node2D" parent="."]
+script = ExtResource("3_mwn1m")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(26, 0)
+target_position = Vector2(0, 75)
+collision_mask = 4
+
+[node name="Sight" type="Area2D" parent="."]
+script = ExtResource("4_xn6er")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sight"]
+position = Vector2(150, 8)
+build_mode = 1
+polygon = PackedVector2Array(21, 24, 21, -82, -17, -82, -124, -27, -124, 8, -20, 24)
+
+[node name="wall_check" type="ShapeCast2D" parent="."]
+position = Vector2(26, -4)
+shape = SubResource("CapsuleShape2D_66tdl")
+target_position = Vector2(0, 15)
+collision_mask = 4
+
+[node name="bullet destroy" type="Area2D" parent="."]
+position = Vector2(15, 27)
+monitoring = false
+
+[node name="Sprite2D" type="Sprite2D" parent="bullet destroy"]
+visible = false
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_2y3d0")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="bullet destroy"]
+polygon = PackedVector2Array(11, 7, 11, 4, 3, -4, -7, -4, -10, 0, -5, 7)
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 2
+monitoring = false
+script = ExtResource("6_e8l2r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(3, 4)
+shape = SubResource("CircleShape2D_xkrsv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(-1.5, 30)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_2aisu")
+
+[connection signal="body_entered" from="Sight" to="Sight" method="_on_body_entered"]
+[connection signal="body_exited" from="Sight" to="Sight" method="_on_body_exited"]
+[connection signal="body_entered" from="hitbox" to="hitbox" method="_on_body_entered"]

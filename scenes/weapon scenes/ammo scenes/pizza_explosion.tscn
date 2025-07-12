@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bc8jp3nnhauwp"]
+
+[ext_resource type="Script" uid="uid://vguvqw6wm16v" path="res://scripts/weapon scripts/pizza_explosion.gd" id="1_3lstj"]
+[ext_resource type="Texture2D" uid="uid://goq3u3q5f21p" path="res://sprites/effects/pizza explosion.png" id="2_17qan"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hatjq"]
+radius = 19.0263
+
+[node name="Pizza Explosion" type="Area2D"]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_3lstj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_17qan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hatjq")

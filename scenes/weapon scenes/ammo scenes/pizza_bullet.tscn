@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cduugnsoyi10w"]
+
+[ext_resource type="Script" uid="uid://bad1ptgmh6tet" path="res://scripts/weapon scripts/pizza_bullet.gd" id="1_0k86n"]
+[ext_resource type="Texture2D" uid="uid://caf3u2g5yixub" path="res://sprites/weapons/ammo/bullet.png" id="2_gc21d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kwt64"]
+size = Vector2(10.4063, 2.2128)
+
+[node name="Bullet" type="Area2D" groups=["bullet"]]
+z_index = -1
+collision_mask = 14
+input_pickable = false
+script = ExtResource("1_0k86n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_gc21d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.598958, 0.111806)
+shape = SubResource("RectangleShape2D_kwt64")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

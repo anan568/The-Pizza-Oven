@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://cimoiaxbykp3v"]
+
+[ext_resource type="Script" uid="uid://p2g7meq77c85" path="res://scripts/ui scripts/health_bar.gd" id="1_250de"]
+[ext_resource type="Texture2D" uid="uid://07jybfcox3b4" path="res://sprites/UI/health frame.png" id="1_ltj77"]
+[ext_resource type="Texture2D" uid="uid://c5vglbh1vub3b" path="res://sprites/UI/health bar fill.png" id="2_0v3aj"]
+[ext_resource type="Texture2D" uid="uid://dvaqcswbgc12u" path="res://sprites/UI/heart.png" id="4_m5iwl"]
+[ext_resource type="FontFile" uid="uid://csq2joob5t330" path="res://fonts/StWinterPixel24DemoRegular-RpV73.otf" id="5_sdpvn"]
+
+[node name="health bar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 16.0
+script = ExtResource("1_250de")
+
+[node name="Health Bar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 51.0
+offset_top = -57.0
+offset_right = 179.0
+offset_bottom = -41.0
+scale = Vector2(3, 3)
+value = 83.0
+texture_under = ExtResource("1_ltj77")
+texture_progress = ExtResource("2_0v3aj")
+
+[node name="Heart" type="Sprite2D" parent="Health Bar"]
+position = Vector2(1.90735e-06, 5.4)
+scale = Vector2(0.65625, 0.65625)
+texture = ExtResource("4_m5iwl")
+
+[node name="Label" type="Label" parent="Health Bar"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 1.0
+offset_right = 1311.0
+offset_bottom = 901.0
+scale = Vector2(0.015, 0.015)
+theme_override_colors/font_color = Color(0.454373, 0.00268281, 0.827715, 1)
+theme_override_fonts/font = ExtResource("5_sdpvn")
+theme_override_font_sizes/font_size = 1000
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1

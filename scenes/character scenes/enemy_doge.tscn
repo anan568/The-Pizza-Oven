@@ -1,0 +1,116 @@
+[gd_scene load_steps=14 format=3 uid="uid://bche1yfa42fur"]
+
+[ext_resource type="Script" uid="uid://djtookx1ad42s" path="res://scripts/character scripts/enemy doge scripts/enemy_doge_ai.gd" id="1_04ie7"]
+[ext_resource type="Texture2D" uid="uid://bgdqy3aa1u457" path="res://sprites/characters/enemy doge/enemy doge lunge attack-Sheet.png" id="2_0jrbn"]
+[ext_resource type="Texture2D" uid="uid://c7gmujjx5t23v" path="res://sprites/characters/enemy doge/enemy doge.png" id="3_4exmn"]
+[ext_resource type="Script" uid="uid://die4hfna573er" path="res://scripts/character scripts/health.gd" id="4_7l2fy"]
+[ext_resource type="Script" uid="uid://d14v0egeeako4" path="res://scripts/character scripts/enemy_sight.gd" id="5_svrvx"]
+[ext_resource type="Script" uid="uid://buw2as6wvgcj4" path="res://scripts/character scripts/enemy doge scripts/doge_maul.gd" id="6_ekp0r"]
+[ext_resource type="Texture2D" uid="uid://ohk08vdcdr4t" path="res://sprites/effects/slash.png" id="7_g1ey7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vqhj"]
+atlas = ExtResource("2_0jrbn")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7a5t"]
+atlas = ExtResource("2_0jrbn")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dm5h7"]
+atlas = ExtResource("2_0jrbn")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3151b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vqhj")
+}],
+"loop": true,
+"name": &"aggressive",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7a5t")
+}],
+"loop": true,
+"name": &"lunge",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_4exmn")
+}],
+"loop": true,
+"name": &"neutral",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dm5h7")
+}],
+"loop": true,
+"name": &"squat",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mnr42"]
+radius = 23.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mt51y"]
+radius = 0.1
+height = 28.0
+
+[node name="Enemy Doge" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_04ie7")
+
+[node name="animation" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 3)
+sprite_frames = SubResource("SpriteFrames_3151b")
+animation = &"neutral"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 4)
+shape = SubResource("CircleShape2D_mnr42")
+
+[node name="health" type="Node2D" parent="."]
+script = ExtResource("4_7l2fy")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(26, 0)
+target_position = Vector2(0, 32)
+collision_mask = 4
+
+[node name="Sight" type="Area2D" parent="."]
+script = ExtResource("5_svrvx")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sight"]
+position = Vector2(150, 8)
+build_mode = 1
+polygon = PackedVector2Array(21, 24, 21, -82, -17, -82, -124, -27, -124, 8, -20, 24)
+
+[node name="wall_check" type="ShapeCast2D" parent="."]
+position = Vector2(26, -4)
+shape = SubResource("CapsuleShape2D_mt51y")
+target_position = Vector2(0, 15)
+collision_mask = 4
+
+[node name="maul hitbox" type="Area2D" parent="."]
+monitoring = false
+script = ExtResource("6_ekp0r")
+
+[node name="slash" type="Sprite2D" parent="maul hitbox"]
+visible = false
+position = Vector2(35, -2)
+texture = ExtResource("7_g1ey7")
+
+[node name="maul collision" type="CollisionPolygon2D" parent="maul hitbox"]
+polygon = PackedVector2Array(19, -30, 39, -30, 51, -17, 53, 8, 44, 24, 18, 26, 32, 12, 32, -15)
+
+[connection signal="body_entered" from="Sight" to="Sight" method="_on_body_entered"]
+[connection signal="body_exited" from="Sight" to="Sight" method="_on_body_exited"]
+[connection signal="area_entered" from="maul hitbox" to="maul hitbox" method="_on_area_entered"]
+[connection signal="body_entered" from="maul hitbox" to="maul hitbox" method="_on_body_entered"]

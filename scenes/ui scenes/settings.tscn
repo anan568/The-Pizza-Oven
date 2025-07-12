@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://80n6k1m53637"]
+
+[ext_resource type="Texture2D" uid="uid://bbxvsp16nr8bo" path="res://sprites/UI/menu sprites/pizza.png" id="1_aesw0"]
+[ext_resource type="Texture2D" uid="uid://djjl607evkx4v" path="res://sprites/UI/menu sprites/settings frame.png" id="2_d6fxo"]
+[ext_resource type="FontFile" uid="uid://g8chhi25r12h" path="res://fonts/sd_auto_pilot.ttf" id="3_7darb"]
+
+[node name="Settings" type="CanvasLayer"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+z_index = -150
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_aesw0")
+stretch_mode = 1
+
+[node name="Panel" type="Panel" parent="TextureRect"]
+modulate = Color(1, 1, 1, 0.627451)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Frame" type="TextureRect" parent="."]
+clip_contents = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.885, 0.885)
+pivot_offset = Vector2(960, 540)
+texture = ExtResource("2_d6fxo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Frame"]
+layout_mode = 0
+offset_left = 62.8248
+offset_top = 52.9943
+offset_right = 1882.82
+offset_bottom = 2055.99
+scale = Vector2(0.2, 0.2)
+
+[node name="Control Button" type="Button" parent="Frame/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.917647, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_7darb")
+theme_override_font_sizes/font_size = 1000
+text = "Control
+"
+flat = true
+
+[node name="Sound Button" type="Button" parent="Frame/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.917647, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_7darb")
+theme_override_font_sizes/font_size = 1000
+text = "Sound"
+flat = true
+
+[node name="Graphic Button" type="Button" parent="Frame/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.917647, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_7darb")
+theme_override_font_sizes/font_size = 1000
+text = "Graphic"
+flat = true

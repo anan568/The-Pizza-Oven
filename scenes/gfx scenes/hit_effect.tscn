@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c072x8812kajj"]
+
+[ext_resource type="Texture2D" uid="uid://d4k3b5qo1pxpj" path="res://sprites/effects/hit effect.png" id="1_kgdo8"]
+[ext_resource type="Script" uid="uid://cexoqw7jcl6l3" path="res://scripts/despawn.gd" id="2_vb2ce"]
+
+[node name="Hit Effect" type="Sprite2D"]
+texture = ExtResource("1_kgdo8")
+script = ExtResource("2_vb2ce")

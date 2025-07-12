@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgcur5hq45q0x"]
+
+[ext_resource type="Script" uid="uid://da1oq2oc1ep5x" path="res://scripts/ui scripts/dev_menu.gd" id="1_6l4mc"]
+
+[node name="dev menu" type="CanvasLayer" groups=["enemy"]]
+layer = 128
+script = ExtResource("1_6l4mc")
+
+[node name="Container" type="TextEdit" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 298.0
+grow_horizontal = 2
+editable = false
+
+[node name="Console" type="RichTextLabel" parent="Container"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+scroll_following = true
+
+[node name="LineEdit" type="LineEdit" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 300.0
+offset_bottom = 331.0
+grow_horizontal = 2
+placeholder_text = "INPUT COMMAND"

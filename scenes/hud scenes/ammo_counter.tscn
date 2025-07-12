@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://258y2idnlowh"]
+
+[ext_resource type="Script" uid="uid://q7vdanxgkj8y" path="res://scripts/ui scripts/ammo_counter.gd" id="1_xyxm0"]
+[ext_resource type="FontFile" uid="uid://r068s5bkb81u" path="res://fonts/BeautifulPoliceOfficer-rvv8x.ttf" id="2_6nsd8"]
+[ext_resource type="Texture2D" uid="uid://cs0my8qjjtlq6" path="res://sprites/weapons/ammo/bullet clip.png" id="3_mt2vk"]
+
+[node name="Ammo Counter" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_xyxm0")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 14.0
+offset_right = 1884.0
+offset_bottom = 1024.0
+scale = Vector2(0.04, 0.04)
+theme_override_fonts/font = ExtResource("2_6nsd8")
+theme_override_font_sizes/font_size = 1000
+text = "10/10"
+horizontal_alignment = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(32, 32)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_mt2vk")

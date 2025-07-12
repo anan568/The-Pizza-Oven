@@ -1,0 +1,112 @@
+[gd_scene load_steps=11 format=3 uid="uid://7a447dg6x0op"]
+
+[ext_resource type="Texture2D" uid="uid://c3vntdnoteb43" path="res://sprites/UI/menu sprites/alt menu bg anim-Sheet.png" id="1_kk68f"]
+[ext_resource type="Script" uid="uid://bm66a5er71bas" path="res://scripts/main menu command line thing.gd" id="2_7xdr2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oyb81"]
+atlas = ExtResource("1_kk68f")
+region = Rect2(0, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ld3mj"]
+atlas = ExtResource("1_kk68f")
+region = Rect2(0, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7txy"]
+atlas = ExtResource("1_kk68f")
+region = Rect2(480, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbxmy"]
+atlas = ExtResource("1_kk68f")
+region = Rect2(960, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wm2at"]
+atlas = ExtResource("1_kk68f")
+region = Rect2(1440, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6ol5"]
+atlas = ExtResource("1_kk68f")
+region = Rect2(1920, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08auk"]
+atlas = ExtResource("1_kk68f")
+region = Rect2(2400, 0, 480, 270)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bkmwd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oyb81")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_ld3mj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7txy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbxmy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wm2at")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6ol5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08auk")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="better main menu" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Control"]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_bkmwd")
+autoplay = "default"
+centered = false
+
+[node name="main menu command line thing" type="CanvasLayer" parent="."]
+script = ExtResource("2_7xdr2")
+
+[node name="Control" type="Control" parent="main menu command line thing"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 494.0
+offset_top = 943.0
+offset_right = 1494.0
+offset_bottom = 983.0
+
+[node name="ColorRect" type="ColorRect" parent="main menu command line thing/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(2.18995e-06, 0.381883, 0.0302076, 1)
+
+[node name="LineEdit" type="LineEdit" parent="main menu command line thing/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "INPUT COMMAND"
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[connection signal="text_submitted" from="main menu command line thing/Control/LineEdit" to="main menu command line thing" method="_on_line_edit_text_submitted"]

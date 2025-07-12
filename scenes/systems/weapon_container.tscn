@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7ni1t7lrmtoh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t7k5s"]
+radius = 8.0
+
+[sub_resource type="Gradient" id="Gradient_ef15u"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Weapon Container" type="RigidBody2D" groups=["weapon_container"]]
+collision_layer = 16
+collision_mask = 4
+mass = 6.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_t7k5s")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+lifetime = 0.8
+emission_shape = 3
+emission_rect_extents = Vector2(4, 4)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 30.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+color = Color(1, 0.917647, 0.584314, 1)
+color_ramp = SubResource("Gradient_ef15u")

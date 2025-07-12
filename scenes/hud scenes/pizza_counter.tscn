@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://deprffb68axgx"]
+
+[ext_resource type="Texture2D" uid="uid://drrjtx16yibfw" path="res://sprites/UI/pizza.png" id="1_g57b3"]
+[ext_resource type="Script" uid="uid://cdw7ablrj5r7f" path="res://scripts/ui scripts/pizza_counter.gd" id="1_xeifn"]
+
+[node name="pizza counter" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_xeifn")
+
+[node name="Pizza Counter" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_direction = 3
+layout_mode = 0
+offset_left = -160.0
+offset_right = 40.0
+offset_bottom = 64.0
+theme_override_constants/separation = -15
+alignment = 1
+
+[node name="Pizza" type="Panel" parent="Pizza Counter"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Pizza Counter/Pizza"]
+position = Vector2(32, 32)
+texture = ExtResource("1_g57b3")
+hframes = 2
+
+[node name="Pizza1" type="Panel" parent="Pizza Counter"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Pizza Counter/Pizza1"]
+position = Vector2(32, 32)
+texture = ExtResource("1_g57b3")
+hframes = 2
+
+[node name="Pizza2" type="Panel" parent="Pizza Counter"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Pizza Counter/Pizza2"]
+position = Vector2(32, 32)
+texture = ExtResource("1_g57b3")
+hframes = 2

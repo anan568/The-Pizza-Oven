@@ -1,0 +1,178 @@
+[gd_scene load_steps=12 format=3 uid="uid://pgnh0mfnpg3f"]
+
+[ext_resource type="Texture2D" uid="uid://dg2m5k5wr1j7v" path="res://sprites/UI/menu sprites/cooked-outlined.png" id="1_5r3ob"]
+[ext_resource type="PackedScene" uid="uid://80n6k1m53637" path="res://scenes/ui scenes/settings.tscn" id="1_abug6"]
+[ext_resource type="Texture2D" uid="uid://dsqrr0dk0o7fr" path="res://sprites/UI/menu sprites/high quality italian blur.png" id="2_4bf4b"]
+[ext_resource type="FontFile" uid="uid://g8chhi25r12h" path="res://fonts/sd_auto_pilot.ttf" id="4_82q4f"]
+[ext_resource type="Texture2D" uid="uid://jvc3vaddcqhc" path="res://sprites/UI/menu sprites/pizza dough button.png" id="5_rvd3n"]
+[ext_resource type="Texture2D" uid="uid://pbiyoc1w0u1i" path="res://sprites/UI/menu sprites/pizza dough overlay.png" id="6_bnwo1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsl5x"]
+atlas = ExtResource("1_5r3ob")
+region = Rect2(0, 0, 192, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7emmi"]
+atlas = ExtResource("1_5r3ob")
+region = Rect2(192, 0, 192, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_duxrl"]
+atlas = ExtResource("1_5r3ob")
+region = Rect2(0, 100, 192, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3rww"]
+atlas = ExtResource("1_5r3ob")
+region = Rect2(192, 100, 192, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ekyp3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wsl5x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7emmi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_duxrl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3rww")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Main Menu" type="Node2D"]
+
+[node name="Settings" parent="." instance=ExtResource("1_abug6")]
+layer = 2
+visible = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+scale = Vector2(4, 4)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Control"]
+sprite_frames = SubResource("SpriteFrames_ekyp3")
+autoplay = "default"
+frame = 3
+frame_progress = 1.0
+offset = Vector2(0, 50)
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+z_index = -440
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_4bf4b")
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -90.0
+offset_right = 150.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(150, 0)
+texture_normal = ExtResource("5_rvd3n")
+
+[node name="Label" type="Label" parent="CanvasLayer/TextureButton"]
+layout_mode = 0
+offset_left = 91.1111
+offset_top = 12.7778
+offset_right = 1672.11
+offset_bottom = 1055.78
+scale = Vector2(0.11, 0.11)
+theme_override_colors/font_color = Color(0.919281, 4.47616e-06, 1.15514e-06, 1)
+theme_override_fonts/font = ExtResource("4_82q4f")
+theme_override_font_sizes/font_size = 1000
+text = "Play"
+
+[node name="overlay" type="TextureRect" parent="CanvasLayer/TextureButton"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_bnwo1")
+
+[node name="TextureButton2" type="TextureButton" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 110.0
+offset_right = 150.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(150, 0)
+texture_normal = ExtResource("5_rvd3n")
+
+[node name="Label2" type="Label" parent="CanvasLayer/TextureButton2"]
+layout_mode = 0
+offset_left = 24.4444
+offset_top = 16.1111
+offset_right = 2306.44
+offset_bottom = 1059.11
+scale = Vector2(0.11, 0.11)
+theme_override_colors/font_color = Color(0.919281, 4.47616e-06, 1.15514e-06, 1)
+theme_override_fonts/font = ExtResource("4_82q4f")
+theme_override_font_sizes/font_size = 1000
+text = "Settings"
+
+[node name="overlay" type="TextureRect" parent="CanvasLayer/TextureButton2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_bnwo1")
+
+[node name="TextureButton3" type="TextureButton" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 310.0
+offset_right = 150.0
+offset_bottom = 410.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(150, 0)
+texture_normal = ExtResource("5_rvd3n")
+
+[node name="Label2" type="Label" parent="CanvasLayer/TextureButton3"]
+layout_mode = 0
+offset_left = 86.6667
+offset_top = 15.0
+offset_right = 1667.67
+offset_bottom = 1058.0
+scale = Vector2(0.11, 0.11)
+theme_override_colors/font_color = Color(0.919281, 4.47616e-06, 1.15514e-06, 1)
+theme_override_fonts/font = ExtResource("4_82q4f")
+theme_override_font_sizes/font_size = 1000
+text = "Quit"
+
+[node name="overlay" type="TextureRect" parent="CanvasLayer/TextureButton3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_bnwo1")
