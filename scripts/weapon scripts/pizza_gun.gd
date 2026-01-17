@@ -39,6 +39,8 @@ func _process(delta):
 		instance.force = bullet_force
 		get_tree().current_scene.add_child(instance)
 		Update_Ammo()
+		$recoil.stop()
+		$recoil.play("recoil")
 		
 	if Input.is_action_just_pressed("reload") and not reloading and not pizza_maker.already_making:
 		reloading = true
