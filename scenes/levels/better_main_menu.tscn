@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://7a447dg6x0op"]
+[gd_scene load_steps=14 format=3 uid="uid://7a447dg6x0op"]
 
 [ext_resource type="Texture2D" uid="uid://c3vntdnoteb43" path="res://sprites/UI/menu sprites/alt menu bg anim-Sheet.png" id="1_kk68f"]
 [ext_resource type="Script" uid="uid://bm66a5er71bas" path="res://scripts/main menu command line thing.gd" id="2_7xdr2"]
 [ext_resource type="Script" uid="uid://dsfr0xbf47n81" path="res://scripts/ui scripts/purple_rain.gd" id="2_75lnp"]
 [ext_resource type="AudioStream" uid="uid://eea1o37dk064" path="res://sounds/songs/09 Purple Rain.wav" id="3_08x6h"]
+[ext_resource type="Texture2D" uid="uid://bro3widfd1ypv" path="res://sprites/UI/menu sprites/hat chair.png" id="3_gmd6f"]
 [ext_resource type="AudioStream" uid="uid://dx0m5xr58ohuk" path="res://sounds/badly looped rain.mp3" id="5_ftkh3"]
 
 [sub_resource type="Gradient" id="Gradient_75lnp"]
@@ -73,6 +74,12 @@ texture = ExtResource("1_kk68f")
 centered = false
 hframes = 6
 script = ExtResource("2_75lnp")
+
+[node name="hat chair" type="Sprite2D" parent="CanvasLayer/Control"]
+z_index = 1
+scale = Vector2(4, 4)
+texture = ExtResource("3_gmd6f")
+centered = false
 
 [node name="main menu command line thing" type="CanvasLayer" parent="."]
 script = ExtResource("2_7xdr2")

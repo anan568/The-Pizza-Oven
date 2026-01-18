@@ -5,8 +5,8 @@ var air_time_multiplier = 20
 var lethal = false
 var flying = false
 var fly_back = false
-var flight_time = 0.5
-var speed = 10
+var flight_time = 0.3
+var speed
 var rotate_speed = 0.8
 var enemy_damage = 25
 var player_damage = 5
@@ -23,6 +23,11 @@ var enemy_damage_multiplier = 2
 var insta_explode = false
 var devving = false
 
+var min_speed = 6
+var max_speed = 20
+var speed_scale = 0.4
+var enemy_multiplier = 12
+
 @onready var root  = get_tree().current_scene
 
 @export var ammo_counter: Control
@@ -32,6 +37,7 @@ var devving = false
 var weapon_container = preload("res://scenes/systems/weapon_container.tscn")
 
 func _ready():
+	speed = min_speed
 	if get_parent().name != "spin spin":
 		set_process(false)
 	current_ammo = max_ammo
@@ -43,8 +49,11 @@ func _process(_delta):
 	if current_ammo > 0:
 		flying = false
 		fly_back = false
+		
+	if Input.is_action_pressed("fire1") and current_ammo > 0 and not pizza_maker.already_making:
+		speed += speed_scale
 	
-	if Input.is_action_just_pressed("fire1") and current_ammo > 0 and not pizza_maker.already_making:
+	if Input.is_action_just_released("fire1") and current_ammo > 0 and not pizza_maker.already_making:
 		Launch()
 		$"cheese drip".emitting = true
 		lethal = true
@@ -72,6 +81,8 @@ func _on_game_console_closed():
 	devving = false
 
 func Launch():
+	if speed > max_speed:
+		speed = max_speed
 	weapon_system.main_weapon = null
 	current_ammo -= 1
 	var launch_pos = global_position
@@ -103,15 +114,16 @@ func _on_body_entered(body):
 				
 	if body.is_in_group("player") and fly_back:
 		$"cheese drip".emitting = false
+		speed = min_speed
 		if lethal:
 			body.Take_Damage(player_damage + time_airborne * air_time_multiplier)
 			
 		if weapon_system.main_weapon != null:
 			flying = false
 			fly_back = false
-			if not lethal:
-				body.Take_Damage(player_damage + time_airborne * air_time_multiplier)
+			body.Take_Damage(player_damage + time_airborne * air_time_multiplier)
 			get_parent().call_deferred("remove_child", self)
+			set_process(false)
 			await get_tree().process_frame
 			var instance = weapon_container.instantiate()
 			instance.global_position = global_position
@@ -129,7 +141,7 @@ func _on_body_entered(body):
 		Update_Ammo()
 	
 	if body.is_in_group("enemy"):
-		get_node(body.get_path()).get_node("health").damaged(enemy_damage)
+		get_node(body.get_path()).get_node("health").damaged(enemy_damage + speed)
 		
 	if body.is_in_group("pizza_platform") and flying:
 		body.queue_free()
