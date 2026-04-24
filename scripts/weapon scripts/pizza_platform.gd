@@ -7,7 +7,10 @@ var explosion_damage
 var insta_explode
 var enemy_damage_multiplier
 
+var flash_rate = 0.05
+
 func explode_triggered():
+	flash()
 	await get_tree().create_timer(explode_time).timeout
 	explode()
 
@@ -21,3 +24,19 @@ func explode():
 	instance.explosion_damage = explosion_damage
 	instance.enemy_damage_multiplier = enemy_damage_multiplier
 	queue_free()
+	
+func flash():
+	await get_tree().create_timer(explode_time - flash_rate * 6).timeout
+	$Sprite2D.modulate = Color(1.0, 0.0, 0.0, 1.0)
+	await get_tree().create_timer(flash_rate).timeout
+	$Sprite2D.modulate = Color(1.0, 1.0, 1.0, 1.0)
+	await get_tree().create_timer(flash_rate).timeout
+	$Sprite2D.modulate = Color(1.0, 0.0, 0.0, 1.0)
+	await get_tree().create_timer(flash_rate).timeout
+	$Sprite2D.modulate = Color(1.0, 1.0, 1.0, 1.0)
+	await get_tree().create_timer(flash_rate).timeout
+	$Sprite2D.modulate = Color(1.0, 0.0, 0.0, 1.0)
+	await get_tree().create_timer(flash_rate).timeout
+	$Sprite2D.modulate = Color(1.0, 1.0, 1.0, 1.0)
+	await get_tree().create_timer(flash_rate).timeout
+	$Sprite2D.modulate = Color(1.0, 0.0, 0.0, 1.0)
